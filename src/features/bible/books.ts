@@ -8,7 +8,7 @@ interface Translation {
     license: string
 }
 
-interface Book {
+export interface Book {
     id: string
     name: string
     url: string
