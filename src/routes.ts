@@ -20,7 +20,7 @@ export const routes: RouteObject[] = [
                         ])
                     return {
                         Component: Books,
-                        loader: booksLoader(queryClient),
+                        loader: () => booksLoader(queryClient),
                     }
                 },
             },
