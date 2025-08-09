@@ -13,11 +13,15 @@ export const routes: RouteObject[] = [
             {
                 index: true,
                 lazy: async () => {
-                    const { default: Home } = await import(
-                        './features/bible/Home'
-                    )
+                    const [{ default: Home }, { randomVerseLoader }] =
+                        await Promise.all([
+                            import('./features/bible/Home'),
+                            import('./features/bible/randomVerse'),
+                        ])
+
                     return {
                         Component: Home,
+                        loader: () => randomVerseLoader(queryClient),
                     }
                 },
             },
