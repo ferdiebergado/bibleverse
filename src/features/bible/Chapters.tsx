@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
-import { Link, useLoaderData } from 'react-router'
+import { useLoaderData } from 'react-router'
+import Chapter from './Chapter'
 import { chaptersLoader } from './chapters'
 
 export default function Chapters() {
@@ -58,19 +59,7 @@ export default function Chapters() {
                 {filteredChapters.length === 0
                     ? 'No results found.'
                     : filteredChapters.map((chapter) => (
-                          <Card
-                              className="mx-3 my-2 min-w-44 shrink px-4 py-3"
-                              key={chapter.chapter}
-                          >
-                              <CardTitle>{chapter.chapter}</CardTitle>
-                              <CardAction>
-                                  <Link
-                                      to={`/books/${chapter.book_id.toLocaleLowerCase()}/chapters/${chapter.chapter.toString()}`}
-                                  >
-                                      View
-                                  </Link>
-                              </CardAction>
-                          </Card>
+                          <Chapter chapter={chapter} key={chapter.chapter} />
                       ))}
             </CardContent>
         </Card>

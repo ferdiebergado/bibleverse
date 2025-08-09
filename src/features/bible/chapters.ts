@@ -9,7 +9,7 @@ interface Translation {
     license: string
 }
 
-interface Chapter {
+export interface Chapter {
     book_id: string
     book: string
     chapter: number
