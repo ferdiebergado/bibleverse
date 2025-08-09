@@ -11,9 +11,7 @@ export default function Book({ name, id }: BookProps) {
         <Card className="mx-3 my-2 min-w-44 shrink px-4 py-3">
             <CardTitle>{name}</CardTitle>
             <CardAction>
-                <Link to={`/books/${id.toLocaleLowerCase()}/chapters`}>
-                    Read
-                </Link>
+                <Link to={`/${id.toLocaleLowerCase()}/chapters`}>Read</Link>
             </CardAction>
         </Card>
     )

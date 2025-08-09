@@ -20,13 +20,6 @@ export default function Header() {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <NavigationMenuLink asChild>
-                            <NavLink to="/books" end>
-                                Books
-                            </NavLink>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
                             <NavLink to="/about" end>
                                 About
                             </NavLink>
