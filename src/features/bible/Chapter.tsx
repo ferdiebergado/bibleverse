@@ -12,7 +12,7 @@ export default function Chapter({ bookId, chapter }: ChapterProps) {
             <CardTitle>Chapter {chapter}</CardTitle>
             <CardAction>
                 <Link
-                    to={`/${bookId.toLocaleLowerCase()}/chapters/${chapter.toString()}`}
+                    to={`/books/${bookId.toLocaleLowerCase()}/chapters/${chapter.toString()}`}
                 >
                     Read
                 </Link>
