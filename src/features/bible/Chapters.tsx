@@ -58,8 +58,12 @@ export default function Chapters() {
             <CardContent className="flex flex-wrap gap-3">
                 {filteredChapters.length === 0
                     ? 'No results found.'
-                    : filteredChapters.map((chapter) => (
-                          <Chapter chapter={chapter} key={chapter.chapter} />
+                    : filteredChapters.map(({ chapter, book_id }) => (
+                          <Chapter
+                              bookId={book_id}
+                              chapter={chapter}
+                              key={chapter}
+                          />
                       ))}
             </CardContent>
         </Card>

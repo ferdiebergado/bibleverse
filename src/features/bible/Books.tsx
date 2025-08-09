@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { useLoaderData } from 'react-router'
 import Book from './Book'
-import type { booksLoader } from './books'
+import { booksLoader } from './books'
 
 export default function Books() {
     const books = useLoaderData<Awaited<ReturnType<typeof booksLoader>>>()
@@ -54,8 +54,8 @@ export default function Books() {
             <CardContent className="flex flex-wrap gap-3">
                 {filteredBooks.length === 0
                     ? 'No records found.'
-                    : filteredBooks.map((book) => (
-                          <Book book={book} key={book.id} />
+                    : filteredBooks.map(({ id, name }) => (
+                          <Book id={id} name={name} key={id} />
                       ))}
             </CardContent>
         </Card>
