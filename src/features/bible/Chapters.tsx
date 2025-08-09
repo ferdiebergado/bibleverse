@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { useLoaderData } from 'react-router'
@@ -39,22 +39,26 @@ export default function Chapters() {
 
     return (
         <Card className="m-8 p-12">
-            <CardTitle className="text-3xl">Chapters</CardTitle>
-            <div className="flex w-full max-w-sm items-center gap-2">
-                <Input
-                    type="search"
-                    placeholder="Search for a chapter"
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <Button
-                    type="button"
-                    variant="outline"
-                    onClick={searchChapters}
-                >
-                    Search
-                </Button>
-            </div>
+            <CardTitle className="text-3xl">{chapters[0].book}</CardTitle>
+
+            <CardAction>
+                <div className="flex w-full max-w-sm items-center gap-2">
+                    <Input
+                        type="search"
+                        placeholder="Search for a chapter"
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <Button
+                        type="button"
+                        variant="outline"
+                        onClick={searchChapters}
+                    >
+                        Search
+                    </Button>
+                </div>
+            </CardAction>
+
             <CardContent className="flex flex-wrap gap-3">
                 {filteredChapters.length === 0
                     ? 'No results found.'
