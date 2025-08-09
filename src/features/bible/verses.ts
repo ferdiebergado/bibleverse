@@ -1,5 +1,6 @@
 import { QueryClient, queryOptions } from '@tanstack/react-query'
 import type { LoaderFunctionArgs } from 'react-router'
+import { defaultURL } from './api'
 import type { Translation } from './translation'
 
 export interface Verse {
@@ -15,31 +16,21 @@ interface Payload {
     verses: Verse[]
 }
 
-function fetchVerses(bookId: string, chapter: string) {
-    return async function (): Promise<Verse[]> {
-        try {
-            const res = await fetch(
-                `https://bible-api.com/data/web/${bookId}/${chapter}`
-            )
-            if (!res.ok) {
-                throw new Error(res.statusText)
-            }
-
-            const { verses } = (await res.json()) as Payload
-
-            return verses
-        } catch (error) {
-            console.error(error)
-
-            throw error
-        }
+async function fetchVerses(bookId: string, chapter: string): Promise<Verse[]> {
+    const res = await fetch(`${defaultURL}/${bookId}/${chapter}`)
+    if (!res.ok) {
+        throw new Error(res.statusText)
     }
+
+    const { verses } = (await res.json()) as Payload
+
+    return verses
 }
 
 function versesQuery(bookId: string, chapter: string) {
     return queryOptions({
-        queryKey: ['verses', bookId],
-        queryFn: fetchVerses(bookId, chapter),
+        queryKey: ['verses', bookId, chapter],
+        queryFn: () => fetchVerses(bookId, chapter),
     })
 }
 
