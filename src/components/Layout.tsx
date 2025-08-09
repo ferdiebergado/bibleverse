@@ -1,6 +1,7 @@
 import { Outlet, useNavigation } from 'react-router'
 import Footer from './Footer'
 import Header from './Header'
+import Spinner from './Spinner'
 
 export default function Layout() {
     const navigation = useNavigation()
@@ -9,11 +10,8 @@ export default function Layout() {
             <Header />
             <main>
                 <section>
-                    {navigation.state === 'loading' ? (
-                        <p className="mt-auto py-6 text-center">Loading...</p>
-                    ) : (
-                        <Outlet />
-                    )}
+                    {navigation.state === 'loading' ? <Spinner /> : null}
+                    <Outlet />
                 </section>
             </main>
             <Footer />
