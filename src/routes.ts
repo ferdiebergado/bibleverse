@@ -13,44 +13,60 @@ export const routes: RouteObject[] = [
             {
                 index: true,
                 lazy: async () => {
-                    const [{ default: Books }, { booksLoader }] =
-                        await Promise.all([
-                            import('./features/bible/Books'),
-                            import('./features/bible/books'),
-                        ])
+                    const { default: Home } = await import(
+                        './features/bible/Home'
+                    )
                     return {
-                        Component: Books,
-                        loader: () => booksLoader(queryClient),
+                        Component: Home,
                     }
                 },
             },
             {
-                path: ':bookId/chapters',
-                lazy: async () => {
-                    const [{ default: Chapters }, { chaptersLoader }] =
-                        await Promise.all([
-                            import('./features/bible/Chapters'),
-                            import('./features/bible/chapters'),
-                        ])
-                    return {
-                        Component: Chapters,
-                        loader: chaptersLoader(queryClient),
-                    }
-                },
-            },
-            {
-                path: ':bookId/chapters/:chapter',
-                lazy: async () => {
-                    const [{ default: Verses }, { versesLoader }] =
-                        await Promise.all([
-                            import('./features/bible/Verses'),
-                            import('./features/bible/verses'),
-                        ])
-                    return {
-                        Component: Verses,
-                        loader: versesLoader(queryClient),
-                    }
-                },
+                path: 'books',
+                children: [
+                    {
+                        index: true,
+                        lazy: async () => {
+                            const [{ default: Books }, { booksLoader }] =
+                                await Promise.all([
+                                    import('./features/bible/Books'),
+                                    import('./features/bible/books'),
+                                ])
+                            return {
+                                Component: Books,
+                                loader: () => booksLoader(queryClient),
+                            }
+                        },
+                    },
+                    {
+                        path: ':bookId/chapters',
+                        lazy: async () => {
+                            const [{ default: Chapters }, { chaptersLoader }] =
+                                await Promise.all([
+                                    import('./features/bible/Chapters'),
+                                    import('./features/bible/chapters'),
+                                ])
+                            return {
+                                Component: Chapters,
+                                loader: chaptersLoader(queryClient),
+                            }
+                        },
+                    },
+                    {
+                        path: ':bookId/chapters/:chapter',
+                        lazy: async () => {
+                            const [{ default: Verses }, { versesLoader }] =
+                                await Promise.all([
+                                    import('./features/bible/Verses'),
+                                    import('./features/bible/verses'),
+                                ])
+                            return {
+                                Component: Verses,
+                                loader: versesLoader(queryClient),
+                            }
+                        },
+                    },
+                ],
             },
         ],
     },
