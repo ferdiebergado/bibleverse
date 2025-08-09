@@ -1,12 +1,5 @@
 import { QueryClient, queryOptions } from '@tanstack/react-query'
-
-interface Translation {
-    identifier: string
-    name: string
-    language: string
-    language_code: string
-    license: string
-}
+import type { Translation } from './translation'
 
 export interface Book {
     id: string
@@ -14,7 +7,7 @@ export interface Book {
     url: string
 }
 
-interface BooksResponse {
+interface Payload {
     translation: Translation
     books: Book[]
 }
@@ -26,7 +19,7 @@ async function fetchBooks(): Promise<Book[]> {
             throw new Error(res.statusText)
         }
 
-        const { books } = (await res.json()) as BooksResponse
+        const { books } = (await res.json()) as Payload
 
         return books
     } catch (error) {

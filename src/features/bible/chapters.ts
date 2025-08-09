@@ -1,13 +1,6 @@
 import { QueryClient, queryOptions } from '@tanstack/react-query'
 import type { LoaderFunctionArgs } from 'react-router'
-
-interface Translation {
-    identifier: string
-    name: string
-    language: string
-    language_code: string
-    license: string
-}
+import type { Translation } from './translation'
 
 export interface Chapter {
     book_id: string
@@ -16,7 +9,7 @@ export interface Chapter {
     url: string
 }
 
-interface ChaptersResponse {
+interface Payload {
     translation: Translation
     chapters: Chapter[]
 }
@@ -29,7 +22,7 @@ function fetchChapters(bookId: string) {
                 throw new Error(res.statusText)
             }
 
-            const { chapters } = (await res.json()) as ChaptersResponse
+            const { chapters } = (await res.json()) as Payload
 
             return chapters
         } catch (error) {
