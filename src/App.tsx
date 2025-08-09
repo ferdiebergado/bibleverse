@@ -1,46 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { lazy } from 'react'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { createBrowserRouter, RouterProvider } from 'react-router'
-import ErrorBoundary from './components/ErrorBoundary'
-import Home from './components/Home'
-import Layout from './components/Layout'
-import NotFound from './components/NotFound'
-import { booksLoader } from './features/bible/books'
-import { chaptersLoader } from './features/bible/chapters'
+import queryClient from './lib/queryClient'
+import { routes } from './routes'
 
-const queryClient = new QueryClient()
-
-const router = createBrowserRouter([
-    {
-        path: '/',
-        Component: Layout,
-        ErrorBoundary: ErrorBoundary,
-        children: [
-            { index: true, Component: Home },
-            {
-                path: 'books',
-                children: [
-                    {
-                        index: true,
-                        Component: lazy(() => import('./features/bible/Books')),
-                        loader: booksLoader(queryClient),
-                    },
-                    {
-                        path: ':bookId/chapters',
-                        Component: lazy(
-                            () => import('./features/bible/Chapters')
-                        ),
-                        loader: chaptersLoader(queryClient),
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        path: '*',
-        Component: NotFound,
-    },
-])
+const router = createBrowserRouter(routes)
 
 function App() {
     return (
