@@ -12,9 +12,7 @@ export interface SearchResult {
 }
 
 async function searchVerses(verse: string): Promise<Verse[]> {
-    if (!verse) {
-        return Promise.resolve([])
-    }
+    if (!verse) return Promise.resolve([])
 
     const res = await fetch(`${api}/${encodeURIComponent(verse)}`)
     if (!res.ok) {
