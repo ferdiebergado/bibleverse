@@ -42,7 +42,7 @@ interface VersesRouteParams extends Record<string, string | undefined> {
 export function versesLoader(queryClient: QueryClient) {
     return async function ({ params }: LoaderFunctionArgs) {
         const { bookId, chapter } = params as VersesRouteParams
-        if (!bookId || !chapter) throw new Error('bookId/chaper is required')
+        if (!bookId || !chapter) throw new Error('bookId/chapter is required')
 
         return await queryClient.ensureQueryData(versesQuery(bookId, chapter))
     }
