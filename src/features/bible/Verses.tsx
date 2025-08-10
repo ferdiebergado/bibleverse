@@ -38,7 +38,7 @@ export default function Verses() {
     }
 
     return (
-        <Card className="m-8 p-12">
+        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
             <CardTitle className="text-3xl">
                 {verses[0].book} Chapter {verses[0].chapter}
             </CardTitle>
@@ -53,7 +53,7 @@ export default function Verses() {
                     Search
                 </Button>
             </CardAction>
-            <CardContent className="flex flex-wrap gap-3">
+            <CardContent className="flex flex-wrap gap-3 px-0">
                 {filteredVerses.length === 0
                     ? 'No results found.'
                     : filteredVerses.map(({ verse, text }) => (

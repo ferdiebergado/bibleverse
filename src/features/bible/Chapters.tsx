@@ -38,7 +38,7 @@ export default function Chapters() {
     }
 
     return (
-        <Card className="m-8 p-12">
+        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
             <CardTitle className="text-3xl">{chapters[0].book}</CardTitle>
 
             <CardAction>
@@ -59,7 +59,7 @@ export default function Chapters() {
                 </div>
             </CardAction>
 
-            <CardContent className="flex flex-wrap gap-3">
+            <CardContent className="flex flex-wrap gap-3 px-0">
                 {filteredChapters.length === 0
                     ? 'No results found.'
                     : filteredChapters.map(({ chapter, book_id }) => (

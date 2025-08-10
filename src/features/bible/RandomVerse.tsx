@@ -7,8 +7,8 @@ export default function RandomVerse() {
         useLoaderData<Awaited<ReturnType<typeof randomVerseLoader>>>()
 
     return (
-        <Card className="mx-8 mt-8 w-full max-w-lg px-4 py-3">
-            <CardTitle className="px-4 py-3 text-3xl">Random Verse</CardTitle>
+        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
+            <CardTitle className="text-3xl">Random Verse</CardTitle>
             <CardContent>
                 <p className="text-justify italic">{text}</p>
                 <p className="my-2 text-right text-2xl font-bold">{`${book} ${chapter.toString()}:${verse.toString()}`}</p>

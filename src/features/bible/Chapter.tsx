@@ -8,7 +8,7 @@ interface ChapterProps {
 
 export default function Chapter({ bookId, chapter }: ChapterProps) {
     return (
-        <Card className="mx-3 my-2 min-w-44 shrink px-4 py-3">
+        <Card className="my-2 w-full px-4 py-3 shadow-md md:w-2xs">
             <CardTitle>Chapter {chapter}</CardTitle>
             <CardAction>
                 <Link

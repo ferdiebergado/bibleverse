@@ -38,7 +38,7 @@ export default function Books() {
     }
 
     return (
-        <Card className="m-8 p-12">
+        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
             <CardTitle className="text-3xl">Books</CardTitle>
 
             <CardAction>
@@ -59,7 +59,7 @@ export default function Books() {
                 </div>
             </CardAction>
 
-            <CardContent className="flex flex-wrap gap-3">
+            <CardContent className="flex flex-wrap gap-3 px-0">
                 {filteredBooks.length === 0
                     ? 'No records found.'
                     : filteredBooks.map(({ id, name }) => (

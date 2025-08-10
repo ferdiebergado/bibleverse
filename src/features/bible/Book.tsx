@@ -8,7 +8,7 @@ interface BookProps {
 
 export default function Book({ name, id }: BookProps) {
     return (
-        <Card className="mx-3 my-2 min-w-44 shrink px-4 py-3">
+        <Card className="my-2 w-full px-4 py-3 shadow-md md:w-2xs">
             <CardTitle>{name}</CardTitle>
             <CardAction>
                 <Link to={`/books/${id.toLocaleLowerCase()}/chapters`}>

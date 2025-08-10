@@ -29,7 +29,7 @@ export default function Home() {
     return (
         <>
             <RandomVerse />
-            <Card className="m-8 p-12">
+            <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
                 <CardTitle className="text-3xl">Verse Search</CardTitle>
                 <CardAction className="flex gap-3">
                     <Input
@@ -45,7 +45,7 @@ export default function Home() {
                     />
                 </CardAction>
 
-                <CardContent className="flex flex-wrap gap-3">
+                <CardContent className="flex flex-wrap gap-3 px-0">
                     {data?.map((verse) => (
                         <Verse
                             verse={verse.verse}

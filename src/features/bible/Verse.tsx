@@ -9,12 +9,14 @@ interface VerseProps {
 
 export default function Verse({ verse, text, book, chapter }: VerseProps) {
     return (
-        <Card className="my-3 w-full max-w-lg px-4 py-4">
-            <CardTitle>
+        <Card className="w-full px-4 shadow-md md:w-96">
+            <CardTitle className="p-2">
                 {book ? `${book} ` : ''}
                 {chapter ? `Chapter ${chapter.toString()} ` : ''}Verse {verse}
             </CardTitle>
-            <CardContent className="text-justify italic">{text}</CardContent>
+            <CardContent className="p-2 text-justify italic">
+                {text}
+            </CardContent>
         </Card>
     )
 }
