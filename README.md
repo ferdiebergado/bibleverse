@@ -44,7 +44,7 @@ pnpm i
 pnpm run dev
 ```
 
-5. Browse the application at [localhost:5173](localhost:5173).
+5. Browse the application at [http://localhost:5173](http://localhost:5173).
 
 ## Deployment
 
