@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import SearchButton from '@/components/SearchButton'
 import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { type ChangeEvent, type KeyboardEvent, useState } from 'react'
@@ -10,7 +10,7 @@ export default function Home() {
     const [searchTerm, setSearchTerm] = useState('')
     const [inputValue, setInputValue] = useState('')
 
-    const { data } = useSearchVerseQuery(searchTerm)
+    const { data, isLoading } = useSearchVerseQuery(searchTerm)
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
         setInputValue(event.target.value)
@@ -31,7 +31,7 @@ export default function Home() {
             <RandomVerse />
             <Card className="m-8 p-12">
                 <CardTitle className="text-3xl">Verse Search</CardTitle>
-                <CardAction className="flex w-full max-w-sm items-center gap-2">
+                <CardAction className="flex gap-3">
                     <Input
                         type="search"
                         placeholder="e.g. John 3:16, matt 25:31-33,46"
@@ -39,13 +39,10 @@ export default function Home() {
                         onKeyDown={handleKeyDown}
                         value={inputValue}
                     />
-                    <Button
-                        type="button"
-                        variant="outline"
-                        onClick={handleClick}
-                    >
-                        Search
-                    </Button>
+                    <SearchButton
+                        handleClick={handleClick}
+                        isLoading={isLoading}
+                    />
                 </CardAction>
 
                 <CardContent className="flex flex-wrap gap-3">
