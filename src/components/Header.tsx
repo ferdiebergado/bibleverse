@@ -5,10 +5,11 @@ import {
     NavigationMenuList,
 } from '@/components/ui/navigation-menu'
 import { NavLink } from 'react-router'
+import { ModeToggle } from './ModeToggle'
 
 export default function Header() {
     return (
-        <header className="bg-foreground text-background px-12 py-3">
+        <header className="px-12 py-3">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
@@ -24,6 +25,9 @@ export default function Header() {
                                 Books
                             </NavLink>
                         </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <ModeToggle />
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
