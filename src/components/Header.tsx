@@ -9,9 +9,9 @@ import { ModeToggle } from './ModeToggle'
 
 export default function Header() {
     return (
-        <header className="px-12 py-3">
+        <header className="px-12 py-3 shadow-md">
             <NavigationMenu>
-                <NavigationMenuList>
+                <NavigationMenuList className="flex gap-5">
                     <NavigationMenuItem>
                         <NavigationMenuLink asChild>
                             <NavLink to="/" end>
