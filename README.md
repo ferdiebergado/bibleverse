@@ -13,6 +13,39 @@ Search and discover verses from the bible.
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
+## Requirements
+
+- [Node](https://nodejs.org/en/download) 22 or higher
+- [pnpm](https://pnpm.io/installation)
+
+## Usage
+
+1. Clone the repository.
+
+```bash
+git clone https://github.com/ferdiebergado/bibleverse.git
+```
+
+2. Change the directory to the cloned repository.
+
+```bash
+cd bibleverse
+```
+
+3. Install the dependencies.
+
+```bash
+pnpm i
+```
+
+4. Run the development server.
+
+```bash
+pnpm run dev
+```
+
+5. Browse the application at [localhost:5173](localhost:5173).
+
 ## Deployment
 
 Build the app.
