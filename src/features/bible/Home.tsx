@@ -29,7 +29,7 @@ export default function Home() {
     return (
         <>
             <RandomVerse />
-            <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
+            <Card className="m-4 w-auto p-6 shadow-md md:m-8 md:w-3xl md:p-12">
                 <CardTitle className="text-3xl">Verse Search</CardTitle>
                 <CardAction className="flex gap-3">
                     <Input
