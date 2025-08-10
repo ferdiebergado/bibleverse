@@ -18,8 +18,13 @@ export default function ThemeProvider({
 
     useEffect(() => {
         const root = window.document.documentElement
-
         root.classList.remove('light', 'dark')
+
+        const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+            const newSystemTheme = e.matches ? 'dark' : 'light'
+            root.classList.remove('light', 'dark')
+            root.classList.add(newSystemTheme)
+        }
 
         if (theme === 'system') {
             const systemTheme = window.matchMedia(
@@ -27,9 +32,19 @@ export default function ThemeProvider({
             ).matches
                 ? 'dark'
                 : 'light'
-
             root.classList.add(systemTheme)
-            return
+
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+            mediaQuery.addEventListener('change', handleSystemThemeChange)
+
+            return () => {
+                mediaQuery.removeEventListener(
+                    'change',
+                    handleSystemThemeChange
+                )
+            }
+        } else {
+            root.classList.add(theme)
         }
 
         root.classList.add(theme)
