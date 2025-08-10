@@ -21,6 +21,7 @@ async function fetchRandomVerse(): Promise<Verse> {
 const randomVerseQuery = queryOptions({
     queryKey: ['random'],
     queryFn: fetchRandomVerse,
+    staleTime: 0,
 })
 
 export async function randomVerseLoader(queryClient: QueryClient) {
