@@ -3,7 +3,7 @@ import { QueryClient } from '@tanstack/react-query'
 export default new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: import.meta.env.PROD ? Infinity : 0,
+            staleTime: 'static',
         },
     },
 })
