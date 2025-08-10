@@ -9,7 +9,7 @@ import { ModeToggle } from './ModeToggle'
 
 export default function Header() {
     return (
-        <header className="px-12 py-3 shadow-md">
+        <header className="mb-16 px-12 py-3 shadow-md dark:shadow-gray-700/80">
             <NavigationMenu>
                 <NavigationMenuList className="flex gap-5">
                     <NavigationMenuItem>
