@@ -1,12 +1,11 @@
+import Home from '@/features/bible/Home'
 import { expect, it } from 'vitest'
 import { render } from 'vitest-browser-react'
-import Home from '../../src/components/Home'
 
-it('shows welcome', async () => {
-    const { getByRole } = render(<Home />)
+it('shows random verse', async () => {
+    const { getByText } = render(<Home />)
 
-    const heading = getByRole('heading')
+    const randomVerse = getByText('Random Ferse')
 
-    await expect.element(heading).toBeVisible()
-    await expect.element(heading).toHaveTextContent('Welcome')
+    await expect.element(randomVerse).toBeVisible()
 })
