@@ -27,6 +27,7 @@ function searchVerseQuery(verse: string) {
     return queryOptions({
         queryKey: ['search', verse],
         queryFn: () => searchVerses(verse),
+        retry: false,
     })
 }
 
