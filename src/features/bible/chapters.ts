@@ -1,5 +1,5 @@
 import { QueryClient, queryOptions } from '@tanstack/react-query'
-import type { LoaderFunctionArgs } from 'react-router'
+import { type LoaderFunctionArgs } from 'react-router'
 import { defaultURL } from './api'
 import type { Translation } from './translation'
 
@@ -26,20 +26,21 @@ async function fetchChapters(bookId: string): Promise<Chapter[]> {
     return chapters
 }
 
-function ChaptersQuery(bookId: string) {
+function chaptersQuery(bookId: string) {
     return queryOptions({
         queryKey: ['chapters', bookId],
         queryFn: () => fetchChapters(bookId),
     })
 }
 
-interface ChapterRouteParams extends Record<string, string> {
-    bookId: string
+interface ChapterRouteParams extends Record<string, string | undefined> {
+    bookId?: string
 }
 
 export function chaptersLoader(queryClient: QueryClient) {
     return async function ({ params }: LoaderFunctionArgs) {
         const { bookId } = params as ChapterRouteParams
-        return await queryClient.ensureQueryData(ChaptersQuery(bookId))
+        if (!bookId) throw new Error('bookId is requied')
+        return await queryClient.ensureQueryData(chaptersQuery(bookId))
     }
 }
