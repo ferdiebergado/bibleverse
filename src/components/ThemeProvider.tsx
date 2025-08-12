@@ -27,14 +27,11 @@ export default function ThemeProvider({
         }
 
         if (theme === 'system') {
-            const systemTheme = window.matchMedia(
-                '(prefers-color-scheme: dark)'
-            ).matches
-                ? 'dark'
-                : 'light'
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+            const systemTheme = mediaQuery.matches ? 'dark' : 'light'
             root.classList.add(systemTheme)
 
-            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
             mediaQuery.addEventListener('change', handleSystemThemeChange)
 
             return () => {
