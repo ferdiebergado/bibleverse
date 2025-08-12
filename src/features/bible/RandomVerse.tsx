@@ -1,18 +1,18 @@
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { useLoaderData } from 'react-router'
 import type { randomVerseLoader } from './randomVerse'
 
 export default function RandomVerse() {
-    const { verse, text, book, chapter } =
+    const { verse, book, text, chapter } =
         useLoaderData<Awaited<ReturnType<typeof randomVerseLoader>>>()
 
     return (
-        <Card className="m-4 w-auto p-6 shadow-md md:m-8 md:w-3xl md:p-12">
-            <CardTitle className="text-3xl">Random Verse</CardTitle>
-            <CardContent>
-                <p className="text-justify italic">{text}</p>
-                <p className="my-2 text-right text-2xl font-bold">{`${book} ${chapter.toString()}:${verse.toString()}`}</p>
-            </CardContent>
-        </Card>
+        <div className="flex w-full flex-col items-center">
+            <blockquote className="max-w-4xl px-4.5 text-xl italic">
+                {text}
+                <footer className="my-4 text-right text-2xl font-bold">
+                    {`${book} ${chapter.toString()}:${verse.toString()}`}
+                </footer>
+            </blockquote>
+        </div>
     )
 }
