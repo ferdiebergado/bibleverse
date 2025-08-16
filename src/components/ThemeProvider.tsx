@@ -1,20 +1,29 @@
+import type { ContextProviderFactory } from '@/lib/context'
 import {
-    type Theme,
     ThemeProviderContext,
+    type Theme,
     type ThemeProviderProps,
 } from '@/lib/theme'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
-export default function ThemeProvider({
+const ThemeProvider: ContextProviderFactory<ThemeProviderProps> = ({
     children,
     defaultTheme = 'system',
     storageKey = 'vite-ui-theme',
     ...props
-}: ThemeProviderProps) {
-    const [theme, setTheme] = useState<Theme>(
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-    )
+}: ThemeProviderProps) => {
+    const [theme, setTheme] = useState<Theme>(() => {
+        const savedTheme = localStorage.getItem(storageKey)
+
+        let theme: Theme
+        if (savedTheme) {
+            theme = savedTheme as Theme
+        } else {
+            theme = defaultTheme
+        }
+
+        return theme
+    })
 
     useEffect(() => {
         const root = window.document.documentElement
@@ -47,14 +56,16 @@ export default function ThemeProvider({
         root.classList.add(theme)
     }, [theme])
 
-    // eslint-disable-next-line react-x/no-unstable-context-value
-    const value = {
-        theme,
-        setTheme: (theme: Theme) => {
-            localStorage.setItem(storageKey, theme)
-            setTheme(theme)
-        },
-    }
+    const value = useMemo(
+        () => ({
+            theme,
+            setTheme: (newTheme: Theme) => {
+                localStorage.setItem(storageKey, newTheme)
+                setTheme(newTheme)
+            },
+        }),
+        [storageKey, theme]
+    )
 
     return (
         <ThemeProviderContext {...props} value={value}>
@@ -62,3 +73,5 @@ export default function ThemeProvider({
         </ThemeProviderContext>
     )
 }
+
+export default ThemeProvider
