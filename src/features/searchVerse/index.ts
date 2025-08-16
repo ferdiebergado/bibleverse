@@ -1,6 +1,6 @@
+import type { Verse } from '@/features/verse'
+import { api } from '@/lib/api'
 import { queryOptions, useQuery } from '@tanstack/react-query'
-import { api } from './api'
-import type { Verse } from './verses'
 
 export interface SearchResult {
     reference: string

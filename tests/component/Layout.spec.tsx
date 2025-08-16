@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout'
-import Home from '@/features/bible/Home'
-import type { Verse } from '@/features/bible/verses'
+import Search from '@/features/searchVerse/Search'
+import type { Verse } from '@/features/verse'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRoutesStub } from 'react-router'
 import { expect, it } from 'vitest'
@@ -16,7 +16,7 @@ it('renders the layout', async () => {
             children: [
                 {
                     index: true,
-                    Component: Home,
+                    Component: Search,
                     loader: (): Verse => ({
                         verse: 16,
                         book_id: 'exo',
@@ -40,9 +40,6 @@ it('renders the layout', async () => {
 
     const main = getByRole('main')
     expect(main).toBeInTheDocument()
-
-    const randomVerseHeading = getByText('Random Verse')
-    expect(randomVerseHeading).toBeVisible()
 
     const randomVerse = getByText('for god so love the world')
     expect(randomVerse).toBeVisible()

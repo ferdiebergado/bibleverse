@@ -1,9 +1,9 @@
-import type { ContextProviderFactory } from '@/lib/context'
 import {
     ThemeProviderContext,
     type Theme,
     type ThemeProviderProps,
 } from '@/lib/theme'
+import type { ContextProviderFactory } from '@/lib/types'
 import { useEffect, useMemo, useState } from 'react'
 
 const ThemeProvider: ContextProviderFactory<ThemeProviderProps> = ({

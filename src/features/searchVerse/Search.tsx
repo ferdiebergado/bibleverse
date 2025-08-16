@@ -1,12 +1,12 @@
 import SearchButton from '@/components/SearchButton'
 import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import RandomVerse from '@/features/randomVerse/RandomVerse'
+import Verse from '@/features/verse/Verse'
 import { type ChangeEvent, type KeyboardEvent, useState } from 'react'
-import { useSearchVerseQuery } from './home'
-import RandomVerse from './RandomVerse'
-import Verse from './Verse'
+import { useSearchVerseQuery } from '.'
 
-export default function Home() {
+export default function Search() {
     const [searchTerm, setSearchTerm] = useState('')
     const [inputValue, setInputValue] = useState('')
 

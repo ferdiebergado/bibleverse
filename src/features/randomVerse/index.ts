@@ -1,7 +1,7 @@
+import type { Verse } from '@/features/verse'
+import { defaultURL } from '@/lib/api'
+import type { Translation } from '@/lib/types'
 import { QueryClient, queryOptions } from '@tanstack/react-query'
-import { defaultURL } from './api'
-import type { Translation } from './translation'
-import type { Verse } from './verses'
 
 export interface Result {
     translation: Translation

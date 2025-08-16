@@ -1,6 +1,6 @@
+import { defaultURL } from '@/lib/api'
+import type { Translation } from '@/lib/types'
 import { QueryClient, queryOptions } from '@tanstack/react-query'
-import { defaultURL } from './api'
-import type { Translation } from './translation'
 
 export interface Book {
     id: string

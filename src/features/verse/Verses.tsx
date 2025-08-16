@@ -3,8 +3,8 @@ import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { useLoaderData } from 'react-router'
+import { versesLoader } from '.'
 import Verse from './Verse'
-import { versesLoader } from './verses'
 
 export default function Verses() {
     const verses = useLoaderData<Awaited<ReturnType<typeof versesLoader>>>()

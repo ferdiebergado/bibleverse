@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router'
-import type { randomVerseLoader } from './randomVerse'
+import type { randomVerseLoader } from '.'
 
 export default function RandomVerse() {
     const { verse, book, text, chapter } =

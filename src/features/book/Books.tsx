@@ -3,30 +3,30 @@ import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { useLoaderData } from 'react-router'
-import Chapter from './Chapter'
-import { chaptersLoader } from './chapters'
+import { booksLoader } from '.'
+import Book from './Book'
 
-export default function Chapters() {
-    const chapters = useLoaderData<Awaited<ReturnType<typeof chaptersLoader>>>()
-    const [filteredChapters, setFilteredChapters] = useState(chapters)
+export default function Books() {
+    const books = useLoaderData<Awaited<ReturnType<typeof booksLoader>>>()
+    const [filteredBooks, setFilteredBooks] = useState(books)
     const [search, setSearch] = useState('')
 
-    function searchChapters() {
+    function searchBooks() {
         if (search === '') {
-            setFilteredChapters(chapters)
+            setFilteredBooks(books)
             return
         }
 
-        const filteredChapters = chapters.filter(
-            ({ chapter }) => chapter.toString() == search
+        const filteredBooks = books.filter((book) =>
+            book.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
-        setFilteredChapters(filteredChapters)
+        setFilteredBooks(filteredBooks)
     }
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const searchTerm = e.target.value
         if (searchTerm === '') {
-            setFilteredChapters(chapters)
+            setFilteredBooks(books)
             return
         }
 
@@ -34,25 +34,25 @@ export default function Chapters() {
     }
 
     function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-        if (e.key == 'Enter') searchChapters()
+        if (e.key == 'Enter') searchBooks()
     }
 
     return (
         <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
-            <CardTitle className="text-3xl">{chapters[0].book}</CardTitle>
+            <CardTitle className="text-3xl">Books</CardTitle>
 
             <CardAction>
                 <div className="flex w-full max-w-sm items-center gap-2">
                     <Input
                         type="search"
-                        placeholder="Search for a chapter"
+                        placeholder="Search for a book"
                         onChange={handleChange}
                         onKeyDown={handleKeyDown}
                     />
                     <Button
                         type="button"
                         variant="outline"
-                        onClick={searchChapters}
+                        onClick={searchBooks}
                     >
                         Search
                     </Button>
@@ -60,14 +60,10 @@ export default function Chapters() {
             </CardAction>
 
             <CardContent className="flex flex-wrap gap-3 px-0">
-                {filteredChapters.length === 0
-                    ? 'No results found.'
-                    : filteredChapters.map(({ chapter, book_id }) => (
-                          <Chapter
-                              bookId={book_id}
-                              chapter={chapter}
-                              key={chapter}
-                          />
+                {filteredBooks.length === 0
+                    ? 'No records found.'
+                    : filteredBooks.map(({ id, name }) => (
+                          <Book id={id} name={name} key={id} />
                       ))}
             </CardContent>
         </Card>

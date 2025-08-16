@@ -17,8 +17,8 @@ export const routes: RouteObject[] = [
                 lazy: async () => {
                     const [{ default: Home }, { randomVerseLoader }] =
                         await Promise.all([
-                            import('./features/bible/Home'),
-                            import('./features/bible/randomVerse'),
+                            import('./features/searchVerse/Search'),
+                            import('./features/randomVerse'),
                         ])
 
                     return {
@@ -35,8 +35,8 @@ export const routes: RouteObject[] = [
                         lazy: async () => {
                             const [{ default: Books }, { booksLoader }] =
                                 await Promise.all([
-                                    import('./features/bible/Books'),
-                                    import('./features/bible/books'),
+                                    import('./features/book/Books'),
+                                    import('./features/book'),
                                 ])
                             return {
                                 Component: Books,
@@ -49,8 +49,8 @@ export const routes: RouteObject[] = [
                         lazy: async () => {
                             const [{ default: Chapters }, { chaptersLoader }] =
                                 await Promise.all([
-                                    import('./features/bible/Chapters'),
-                                    import('./features/bible/chapters'),
+                                    import('./features/chapter/Chapters'),
+                                    import('./features/chapter'),
                                 ])
                             return {
                                 Component: Chapters,
@@ -63,8 +63,8 @@ export const routes: RouteObject[] = [
                         lazy: async () => {
                             const [{ default: Verses }, { versesLoader }] =
                                 await Promise.all([
-                                    import('./features/bible/Verses'),
-                                    import('./features/bible/verses'),
+                                    import('./features/verse/Verses'),
+                                    import('./features/verse'),
                                 ])
                             return {
                                 Component: Verses,
