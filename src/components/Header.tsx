@@ -1,10 +1,9 @@
 import {
     NavigationMenu,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
 } from '@/components/ui/navigation-menu'
-import { NavLink } from 'react-router'
+import Link from './Link'
 import { ModeToggle } from './ModeToggle'
 
 export default function Header() {
@@ -13,18 +12,14 @@ export default function Header() {
             <NavigationMenu>
                 <NavigationMenuList className="flex gap-5">
                     <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <NavLink to="/" end>
-                                Home
-                            </NavLink>
-                        </NavigationMenuLink>
+                        <Link to="/" end>
+                            Home
+                        </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <NavLink to="/books" end>
-                                Books
-                            </NavLink>
-                        </NavigationMenuLink>
+                        <Link to="/books" end>
+                            Books
+                        </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <ModeToggle />
