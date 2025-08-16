@@ -27,7 +27,7 @@ export default function Home() {
     }
 
     return (
-        <>
+        <div className="flex flex-col items-center">
             <RandomVerse />
             <Card className="m-4 w-auto p-6 shadow-md md:m-8 md:w-3xl md:p-12">
                 <CardTitle className="text-3xl">Verse Search</CardTitle>
@@ -55,6 +55,6 @@ export default function Home() {
                     ))}
                 </CardContent>
             </Card>
-        </>
+        </div>
     )
 }
