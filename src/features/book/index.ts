@@ -24,7 +24,7 @@ async function fetchBooks(): Promise<Book[]> {
     return books
 }
 
-const booksQuery = queryOptions({
+export const booksQuery = queryOptions({
     queryKey: ['books'],
     queryFn: fetchBooks,
 })

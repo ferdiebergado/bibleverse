@@ -26,21 +26,22 @@ async function fetchChapters(bookId: string): Promise<Chapter[]> {
     return chapters
 }
 
-function chaptersQuery(bookId: string) {
+export function chaptersQuery(bookId?: string) {
+    if (!bookId) throw new Error('bookId is required')
+
     return queryOptions({
         queryKey: ['chapters', bookId],
         queryFn: () => fetchChapters(bookId),
     })
 }
 
-interface ChapterRouteParams extends Record<string, string | undefined> {
+export interface ChapterRouteParams extends Record<string, string | undefined> {
     bookId?: string
 }
 
 export function chaptersLoader(queryClient: QueryClient) {
     return async function ({ params }: LoaderFunctionArgs) {
         const { bookId } = params as ChapterRouteParams
-        if (!bookId) throw new Error('bookId is requied')
         return await queryClient.ensureQueryData(chaptersQuery(bookId))
     }
 }

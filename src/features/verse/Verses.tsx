@@ -1,13 +1,20 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { useQuery } from '@tanstack/react-query'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
-import { useLoaderData } from 'react-router'
-import { versesLoader } from '.'
+import { useLoaderData, useParams } from 'react-router'
+import { versesLoader, versesQuery, type VersesRouteParams } from '.'
 import Verse from './Verse'
 
 export default function Verses() {
-    const verses = useLoaderData<Awaited<ReturnType<typeof versesLoader>>>()
+    const initialData =
+        useLoaderData<Awaited<ReturnType<typeof versesLoader>>>()
+    const { bookId, chapter } = useParams<VersesRouteParams>()
+    const { data: verses } = useQuery({
+        ...versesQuery(bookId, chapter),
+        initialData,
+    })
     const [filteredVerses, setFilteredVerses] = useState(verses)
     const [search, setSearch] = useState('')
 
@@ -40,7 +47,7 @@ export default function Verses() {
     return (
         <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
             <CardTitle className="text-3xl">
-                {verses[0].book} Chapter {verses[0].chapter}
+                {verses[0].book} Chapter {filteredVerses[0].chapter}
             </CardTitle>
             <CardAction className="flex w-full max-w-sm items-center gap-2">
                 <Input

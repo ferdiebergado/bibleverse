@@ -18,7 +18,7 @@ async function fetchRandomVerse(): Promise<Verse> {
     return random_verse
 }
 
-const randomVerseQuery = queryOptions({
+export const randomVerseQuery = queryOptions({
     queryKey: ['random'],
     queryFn: fetchRandomVerse,
     staleTime: 0,

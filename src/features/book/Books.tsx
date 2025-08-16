@@ -1,13 +1,18 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardAction, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { useQuery } from '@tanstack/react-query'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { useLoaderData } from 'react-router'
-import { booksLoader } from '.'
+import { booksLoader, booksQuery } from '.'
 import Book from './Book'
 
 export default function Books() {
-    const books = useLoaderData<Awaited<ReturnType<typeof booksLoader>>>()
+    const initialData = useLoaderData<Awaited<ReturnType<typeof booksLoader>>>()
+    const { data: books } = useQuery({
+        ...booksQuery,
+        initialData,
+    })
     const [filteredBooks, setFilteredBooks] = useState(books)
     const [search, setSearch] = useState('')
 

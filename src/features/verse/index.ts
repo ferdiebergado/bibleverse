@@ -27,14 +27,15 @@ async function fetchVerses(bookId: string, chapter: string): Promise<Verse[]> {
     return verses
 }
 
-function versesQuery(bookId: string, chapter: string) {
+export function versesQuery(bookId?: string, chapter?: string) {
+    if (!bookId || !chapter) throw new Error('bookId/chapter is required')
     return queryOptions({
         queryKey: ['verses', bookId, chapter],
         queryFn: () => fetchVerses(bookId, chapter),
     })
 }
 
-interface VersesRouteParams extends Record<string, string | undefined> {
+export interface VersesRouteParams extends Record<string, string | undefined> {
     bookId?: string
     chapter?: string
 }
@@ -42,7 +43,6 @@ interface VersesRouteParams extends Record<string, string | undefined> {
 export function versesLoader(queryClient: QueryClient) {
     return async function ({ params }: LoaderFunctionArgs) {
         const { bookId, chapter } = params as VersesRouteParams
-        if (!bookId || !chapter) throw new Error('bookId/chapter is required')
 
         return await queryClient.ensureQueryData(versesQuery(bookId, chapter))
     }
