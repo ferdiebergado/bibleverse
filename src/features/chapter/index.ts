@@ -1,7 +1,6 @@
 import { defaultURL } from '@/lib/api'
 import type { Translation } from '@/lib/types'
-import { QueryClient, queryOptions } from '@tanstack/react-query'
-import { type LoaderFunctionArgs } from 'react-router'
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 
 export interface Chapter {
     book_id: string
@@ -26,22 +25,20 @@ async function fetchChapters(bookId: string): Promise<Chapter[]> {
     return chapters
 }
 
-export function chaptersQuery(bookId?: string) {
-    if (!bookId) throw new Error('bookId is required')
-
+export function chaptersQuery(bookId: string) {
     return queryOptions({
         queryKey: ['chapters', bookId],
         queryFn: () => fetchChapters(bookId),
     })
 }
 
-export interface ChapterRouteParams extends Record<string, string | undefined> {
+export interface ChaptersRouteParams
+    extends Record<string, string | undefined> {
     bookId?: string
 }
 
-export function chaptersLoader(queryClient: QueryClient) {
-    return async function ({ params }: LoaderFunctionArgs) {
-        const { bookId } = params as ChapterRouteParams
-        return await queryClient.ensureQueryData(chaptersQuery(bookId))
-    }
+export function useChaptersQuery(bookId?: string) {
+    if (!bookId) throw new Error('bookId is required')
+
+    return useSuspenseQuery(chaptersQuery(bookId))
 }

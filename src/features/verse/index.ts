@@ -1,7 +1,6 @@
 import { defaultURL } from '@/lib/api'
 import type { Translation } from '@/lib/types'
-import { QueryClient, queryOptions } from '@tanstack/react-query'
-import { type LoaderFunctionArgs } from 'react-router'
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 
 export interface Verse {
     book_id: string
@@ -27,8 +26,7 @@ async function fetchVerses(bookId: string, chapter: string): Promise<Verse[]> {
     return verses
 }
 
-export function versesQuery(bookId?: string, chapter?: string) {
-    if (!bookId || !chapter) throw new Error('bookId/chapter is required')
+export function versesQuery(bookId: string, chapter: string) {
     return queryOptions({
         queryKey: ['verses', bookId, chapter],
         queryFn: () => fetchVerses(bookId, chapter),
@@ -40,10 +38,8 @@ export interface VersesRouteParams extends Record<string, string | undefined> {
     chapter?: string
 }
 
-export function versesLoader(queryClient: QueryClient) {
-    return async function ({ params }: LoaderFunctionArgs) {
-        const { bookId, chapter } = params as VersesRouteParams
+export function useVersesQuery(bookId?: string, chapter?: string) {
+    if (!bookId || !chapter) throw new Error('bookId/chapter is required')
 
-        return await queryClient.ensureQueryData(versesQuery(bookId, chapter))
-    }
+    return useSuspenseQuery(versesQuery(bookId, chapter))
 }

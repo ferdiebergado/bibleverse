@@ -3,8 +3,8 @@ import {
     NavigationMenuItem,
     NavigationMenuList,
 } from '@/components/ui/navigation-menu'
-import Link from './Link'
 import { ModeToggle } from './ModeToggle'
+import NavigationLink from './NavigationLink'
 
 export default function Header() {
     return (
@@ -12,14 +12,14 @@ export default function Header() {
             <NavigationMenu>
                 <NavigationMenuList className="flex gap-5">
                     <NavigationMenuItem>
-                        <Link to="/" end>
+                        <NavigationLink to="/" end>
                             Home
-                        </Link>
+                        </NavigationLink>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <Link to="/books" end>
+                        <NavigationLink to="/books" end>
                             Books
-                        </Link>
+                        </NavigationLink>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <ModeToggle />

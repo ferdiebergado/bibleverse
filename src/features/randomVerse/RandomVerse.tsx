@@ -1,17 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
-import { useLoaderData } from 'react-router'
-import { randomVerseQuery, type randomVerseLoader } from '.'
+import { useRandomVerseQuery } from '.'
 
 export default function RandomVerse() {
-    const initialData =
-        useLoaderData<Awaited<ReturnType<typeof randomVerseLoader>>>()
-
     const {
         data: { verse, chapter, text, book },
-    } = useQuery({
-        ...randomVerseQuery,
-        initialData,
-    })
+    } = useRandomVerseQuery()
 
     return (
         <div className="flex w-full flex-col items-center">

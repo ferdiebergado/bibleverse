@@ -1,6 +1,6 @@
 import { defaultURL } from '@/lib/api'
 import type { Translation } from '@/lib/types'
-import { QueryClient, queryOptions } from '@tanstack/react-query'
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 
 export interface Book {
     id: string
@@ -29,6 +29,6 @@ export const booksQuery = queryOptions({
     queryFn: fetchBooks,
 })
 
-export async function booksLoader(queryClient: QueryClient) {
-    return await queryClient.ensureQueryData(booksQuery)
+export function useBooksQuery() {
+    return useSuspenseQuery(booksQuery)
 }

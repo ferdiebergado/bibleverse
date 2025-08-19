@@ -13,8 +13,8 @@ export default function Book({ name, id }: BookProps) {
                 <CardTitle>{name}</CardTitle>
                 <CardAction>
                     <Link
-                        className="bg-primary text-primary-foreground rounded-lg px-3 py-1"
-                        to={`/books/${id.toLocaleLowerCase()}/chapters`}
+                        className="underline underline-offset-4"
+                        to={`/books/${id.toLocaleLowerCase()}`}
                     >
                         Read
                     </Link>

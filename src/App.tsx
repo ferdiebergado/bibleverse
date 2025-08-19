@@ -1,14 +1,31 @@
-import { QueryClientProvider } from '@tanstack/react-query'
-import { createBrowserRouter, RouterProvider } from 'react-router'
-import queryClient from './lib/queryClient'
-import { routes } from './routes'
+import {
+    QueryClient,
+    QueryClientProvider,
+    QueryErrorResetBoundary,
+} from '@tanstack/react-query'
+import { type FC } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import FallbackRender from './components/ErrorFallback'
+import ThemeProvider from './components/ThemeProvider'
+import Router from './router'
 
-const router = createBrowserRouter(routes)
+const queryClient = new QueryClient()
 
-function App() {
+const App: FC = () => {
     return (
         <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <QueryErrorResetBoundary>
+                {({ reset }) => (
+                    <ErrorBoundary
+                        fallbackRender={FallbackRender}
+                        onReset={reset}
+                    >
+                        <ThemeProvider>
+                            <Router />
+                        </ThemeProvider>
+                    </ErrorBoundary>
+                )}
+            </QueryErrorResetBoundary>
         </QueryClientProvider>
     )
 }
