@@ -1,37 +1,39 @@
-import Layout from '@/components/Layout'
-import Search from '@/features/searchVerse/Search'
-import type { Verse } from '@/features/verse'
+import type { Result } from '@/features/randomVerse'
+import Router from '@/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { createRoutesStub } from 'react-router'
-import { expect, it } from 'vitest'
+import { afterAll, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
+
+const mockVerse = {
+    verse: 16,
+    book_id: 'jhn',
+    book: 'john',
+    chapter: 3,
+    text: 'for god so love the world',
+}
+
+const mockResult: Partial<Result> = {
+    random_verse: mockVerse,
+}
+
+const mockResponse: Partial<Response> = {
+    ok: true,
+    json: () => Promise.resolve(mockResult),
+}
+
+vi.stubGlobal(
+    'fetch',
+    vi.fn(() => Promise.resolve(mockResponse))
+)
+
+afterAll(() => vi.unstubAllGlobals())
 
 it('renders the layout', async () => {
     const queryClient = new QueryClient()
 
-    const Stub = createRoutesStub([
-        {
-            path: '/',
-            Component: Layout,
-            children: [
-                {
-                    index: true,
-                    Component: Search,
-                    loader: (): Verse => ({
-                        verse: 16,
-                        book_id: 'exo',
-                        book: 'john',
-                        chapter: 3,
-                        text: 'for god so love the world',
-                    }),
-                },
-            ],
-        },
-    ])
-
     const { getByRole, getByText, getByPlaceholder } = render(
         <QueryClientProvider client={queryClient}>
-            <Stub initialEntries={['/']} />
+            <Router />
         </QueryClientProvider>
     )
 
@@ -42,7 +44,7 @@ it('renders the layout', async () => {
     expect(main).toBeInTheDocument()
 
     const randomVerse = getByText('for god so love the world')
-    expect(randomVerse).toBeVisible()
+    await expect.element(randomVerse).toBeVisible()
 
     const searchVerse = getByText('Verse Search')
     expect(searchVerse).toBeVisible()
