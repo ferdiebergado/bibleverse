@@ -1,11 +1,12 @@
-import { type FC } from 'react'
+import { lazy, type FC } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import Layout from './components/Layout'
-import NotFound from './components/NotFound'
-import Books from './features/book/Books'
-import Chapters from './features/chapter/Chapters'
-import Verses from './features/verse/Verses'
-import Home from './Home'
+
+const Home = lazy(() => import('@/Home'))
+const Books = lazy(() => import('@/features/book/Books'))
+const Chapters = lazy(() => import('@/features/chapter/Chapters'))
+const Verses = lazy(() => import('@/features/verse/Verses'))
+const NotFound = lazy(() => import('@/components/NotFound'))
 
 const Router: FC = () => {
     return (
