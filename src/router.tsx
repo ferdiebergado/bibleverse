@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import Layout from './components/Layout'
 
 const Home = lazy(() => import('@/Home'))
-const Books = lazy(() => import('@/features/book/Books'))
-const Chapters = lazy(() => import('@/features/chapter/Chapters'))
-const Verses = lazy(() => import('@/features/verse/Verses'))
+const BooksPage = lazy(() => import('@/features/book/BooksPage'))
+const ChaptersPage = lazy(() => import('@/features/chapter/ChaptersPage'))
+const VersesPage = lazy(() => import('@/features/verse/VersesPage'))
 const NotFound = lazy(() => import('@/components/NotFound'))
 
 const Router: FC = () => {
@@ -15,9 +15,12 @@ const Router: FC = () => {
                 <Route element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="books">
-                        <Route index element={<Books />} />
-                        <Route path=":bookId" element={<Chapters />} />
-                        <Route path=":bookId/:chapter" element={<Verses />} />
+                        <Route index element={<BooksPage />} />
+                        <Route path=":bookId" element={<ChaptersPage />} />
+                        <Route
+                            path=":bookId/:chapter"
+                            element={<VersesPage />}
+                        />
                     </Route>
                 </Route>
                 <Route path="*" element={<NotFound />} />
