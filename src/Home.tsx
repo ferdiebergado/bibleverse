@@ -1,7 +1,7 @@
 import { Suspense, type FC } from 'react'
 import RandomVerse from './features/randomVerse/RandomVerse'
 import RandomVerseSkeleton from './features/randomVerse/Skeleton'
-import Search from './features/searchVerse/Search'
+import SearchVerse from './features/searchVerse/SearchVerse'
 
 const Home: FC = () => {
     return (
@@ -9,7 +9,7 @@ const Home: FC = () => {
             <Suspense fallback={<RandomVerseSkeleton />}>
                 <RandomVerse />
             </Suspense>
-            <Search />
+            <SearchVerse />
         </>
     )
 }

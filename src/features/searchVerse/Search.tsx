@@ -1,67 +1,47 @@
-import SearchButton from '@/components/SearchButton'
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
+import { CardAction } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import Verse from '@/features/verse/Verse'
-import { type ChangeEvent, type FC, type KeyboardEvent, useState } from 'react'
-import { useSearchVerseQuery } from '.'
+import type { ChangeEvent, FC } from 'react'
+import { useCallback, useState, type KeyboardEvent } from 'react'
+import SearchButton from '../book/SearchButton'
 
-const Search: FC = () => {
-    const [searchTerm, setSearchTerm] = useState('')
+interface SearchProps {
+    placeHolder: string
+    onSearch: (searchTerm: string) => void
+    onClear: () => void
+}
+
+const Search: FC<SearchProps> = ({ placeHolder, onSearch, onClear }) => {
     const [inputValue, setInputValue] = useState('')
 
-    const { data, isPending, isError, error } = useSearchVerseQuery(searchTerm)
+    const handleSearchClick = useCallback(() => {
+        onSearch(inputValue)
+    }, [onSearch, inputValue])
 
-    function handleInputChange(event: ChangeEvent<HTMLInputElement>): void {
-        setInputValue(event.target.value)
-    }
-
-    function handleKeyDown(event: KeyboardEvent<HTMLInputElement>): void {
-        if (event.key === 'Enter') {
-            setSearchTerm(inputValue)
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setInputValue(value)
+        if (value === '') {
+            onClear() // Call onClear when the input is empty
         }
     }
 
-    function handleClick() {
-        setSearchTerm(inputValue)
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSearchClick()
+        }
     }
 
     return (
-        <div className="flex flex-col items-center">
-            <Card className="m-4 w-auto p-6 shadow-md md:m-8 md:w-3xl md:p-12">
-                <CardHeader>
-                    <CardTitle className="text-3xl">Verse Search</CardTitle>
-                    <CardAction className="flex gap-3">
-                        <Input
-                            type="search"
-                            placeholder="e.g. John 3:16, matt 25:31-33,46"
-                            onChange={handleInputChange}
-                            onKeyDown={handleKeyDown}
-                            value={inputValue}
-                        />
-                        <SearchButton
-                            handleClick={handleClick}
-                            isLoading={isPending}
-                        />
-                    </CardAction>
-                </CardHeader>
-
-                <CardContent className="flex flex-wrap gap-3 px-0">
-                    {isError ? (
-                        <p className="text-red-500">Error: {error.message}</p>
-                    ) : (
-                        data?.map(({ verse, text }) => (
-                            <Verse verse={verse} text={text} key={verse} />
-                        ))
-                    )}
-                </CardContent>
-            </Card>
-        </div>
+        <CardAction className="flex gap-3">
+            <Input
+                type="search"
+                placeholder={placeHolder}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                value={inputValue}
+            />
+            <SearchButton onClick={handleSearchClick} />
+        </CardAction>
     )
 }
 
