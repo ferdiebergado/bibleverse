@@ -3,10 +3,9 @@ import {
     QueryClientProvider,
     QueryErrorResetBoundary,
 } from '@tanstack/react-query'
-import { Suspense, type FC } from 'react'
+import { type FC } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import FallbackRender from './components/ErrorFallback'
-import Spinner from './components/Spinner'
 import ThemeProvider from './components/ThemeProvider'
 import Router from './router'
 
@@ -28,9 +27,7 @@ const App: FC = () => {
                         onReset={reset}
                     >
                         <ThemeProvider>
-                            <Suspense fallback={<Spinner />}>
-                                <Router />
-                            </Suspense>
+                            <Router />
                         </ThemeProvider>
                     </ErrorBoundary>
                 )}

@@ -1,7 +1,7 @@
 import type { Verse } from '@/features/verse'
 import { defaultURL } from '@/lib/api'
 import type { Translation } from '@/lib/types'
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
+import { queryOptions, useQuery } from '@tanstack/react-query'
 
 export interface Result {
     translation: Translation
@@ -25,5 +25,5 @@ export const randomVerseQuery = queryOptions({
 })
 
 export function useRandomVerseQuery() {
-    return useSuspenseQuery(randomVerseQuery)
+    return useQuery(randomVerseQuery)
 }

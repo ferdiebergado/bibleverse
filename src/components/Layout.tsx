@@ -4,14 +4,14 @@ import Header from './Header'
 
 export default function Layout() {
     return (
-        <>
+        <div className="flex min-h-screen flex-col">
             <Header />
-            <main>
+            <main className="grow">
                 <section>
                     <Outlet />
                 </section>
             </main>
             <Footer />
-        </>
+        </div>
     )
 }

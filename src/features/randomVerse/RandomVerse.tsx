@@ -1,9 +1,15 @@
+import type { FC } from 'react'
 import { useRandomVerseQuery } from '.'
+import RandomVerseSkeleton from './Skeleton'
 
-export default function RandomVerse() {
-    const {
-        data: { verse, chapter, text, book },
-    } = useRandomVerseQuery()
+const RandomVerse: FC = () => {
+    const { isPending, isError, error, data } = useRandomVerseQuery()
+
+    if (isPending) return <RandomVerseSkeleton />
+
+    if (isError) return <p className="text-red-500">{error.message}</p>
+
+    const { text, book, chapter, verse } = data
 
     return (
         <div className="flex w-full flex-col items-center">
@@ -16,3 +22,5 @@ export default function RandomVerse() {
         </div>
     )
 }
+
+export default RandomVerse
