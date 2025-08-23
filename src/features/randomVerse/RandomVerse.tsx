@@ -1,3 +1,4 @@
+import ErrorMessage from '@/components/ErrorMessage'
 import type { FC } from 'react'
 import { useRandomVerseQuery } from '.'
 import RandomVerseSkeleton from './Skeleton'
@@ -7,7 +8,7 @@ const RandomVerse: FC = () => {
 
     if (isPending) return <RandomVerseSkeleton />
 
-    if (isError) return <p className="text-red-500">{error.message}</p>
+    if (isError) return <ErrorMessage message={error.message} />
 
     const { text, book, chapter, verse } = data
 
