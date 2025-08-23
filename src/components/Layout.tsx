@@ -1,6 +1,8 @@
+import { Suspense } from 'react'
 import { Outlet } from 'react-router'
 import Footer from './Footer'
 import Header from './Header'
+import Spinner from './Spinner'
 
 export default function Layout() {
     return (
@@ -8,7 +10,9 @@ export default function Layout() {
             <Header />
             <main className="grow">
                 <section>
-                    <Outlet />
+                    <Suspense fallback={<Spinner />}>
+                        <Outlet />
+                    </Suspense>
                 </section>
             </main>
             <Footer />
