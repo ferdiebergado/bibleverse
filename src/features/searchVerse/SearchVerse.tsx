@@ -1,16 +1,12 @@
+import CardContentMain from '@/components/CardContentMain'
+import CardMain from '@/components/CardMain'
 import ErrorMessage from '@/components/ErrorMessage'
 import { SkeletonCard } from '@/components/SkeletonCard'
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
+import { CardAction, CardHeader, CardTitle } from '@/components/ui/card'
+import { useSearchVerseQuery } from '@/features/searchVerse'
+import Search from '@/features/searchVerse/Search'
 import Verse from '@/features/verse/Verse'
 import { type FC, useState } from 'react'
-import { useSearchVerseQuery } from '.'
-import Search from './Search'
 
 const SearchVerse: FC = () => {
     const initialSearchTerm = ''
@@ -32,7 +28,7 @@ const SearchVerse: FC = () => {
     }
 
     return (
-        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
+        <CardMain>
             <CardHeader>
                 <CardTitle className="text-3xl">Verse Search</CardTitle>
                 <CardAction>
@@ -44,7 +40,7 @@ const SearchVerse: FC = () => {
                 </CardAction>
             </CardHeader>
 
-            <CardContent className="flex flex-wrap gap-3 px-0">
+            <CardContentMain>
                 {isPending ? (
                     <SkeletonCard />
                 ) : isError ? (
@@ -54,8 +50,8 @@ const SearchVerse: FC = () => {
                         <Verse verse={verse} text={text} key={verse} />
                     ))
                 )}
-            </CardContent>
-        </Card>
+            </CardContentMain>
+        </CardMain>
     )
 }
 

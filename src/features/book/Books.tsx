@@ -1,11 +1,7 @@
+import CardContentMain from '@/components/CardContentMain'
+import CardMain from '@/components/CardMain'
 import NoResult from '@/components/NoResult'
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
+import { CardAction, CardHeader, CardTitle } from '@/components/ui/card'
 import { useState, type FC } from 'react'
 import { useBooksQuery } from '.'
 import Book from './Book'
@@ -29,7 +25,7 @@ const Books: FC = () => {
     }
 
     return (
-        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
+        <CardMain>
             <CardHeader>
                 <CardTitle className="text-3xl">Books</CardTitle>
                 <CardAction>
@@ -40,7 +36,7 @@ const Books: FC = () => {
                     />
                 </CardAction>
             </CardHeader>
-            <CardContent className="flex flex-wrap gap-3 px-0">
+            <CardContentMain>
                 {filteredBooks.length === 0 ? (
                     <NoResult />
                 ) : (
@@ -48,8 +44,8 @@ const Books: FC = () => {
                         <Book id={id} name={name} key={id} />
                     ))
                 )}
-            </CardContent>
-        </Card>
+            </CardContentMain>
+        </CardMain>
     )
 }
 

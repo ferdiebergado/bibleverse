@@ -1,11 +1,7 @@
+import CardContentMain from '@/components/CardContentMain'
+import CardMain from '@/components/CardMain'
 import NoResult from '@/components/NoResult'
-import {
-    Card,
-    CardAction,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
+import { CardAction, CardHeader, CardTitle } from '@/components/ui/card'
 import { Search } from '@/features/book/Search'
 import { useChaptersQuery, type ChaptersRouteParams } from '@/features/chapter'
 import Chapter from '@/features/chapter/Chapter'
@@ -32,10 +28,9 @@ const Chapters: FC = () => {
     }
 
     return (
-        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
+        <CardMain>
             <CardHeader>
                 <CardTitle className="text-3xl">{currentBook}</CardTitle>
-
                 <CardAction>
                     <Search
                         placeHolder="Search chapters..."
@@ -45,7 +40,7 @@ const Chapters: FC = () => {
                 </CardAction>
             </CardHeader>
 
-            <CardContent className="flex flex-wrap gap-3 px-0">
+            <CardContentMain>
                 {filteredChapters.length === 0 ? (
                     <NoResult />
                 ) : (
@@ -57,8 +52,8 @@ const Chapters: FC = () => {
                         />
                     ))
                 )}
-            </CardContent>
-        </Card>
+            </CardContentMain>
+        </CardMain>
     )
 }
 
