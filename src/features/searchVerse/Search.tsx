@@ -1,8 +1,8 @@
 import { CardAction } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import SearchButton from '@/features/book/SearchButton'
 import type { ChangeEvent, FC } from 'react'
 import { useCallback, useState, type KeyboardEvent } from 'react'
-import SearchButton from '../book/SearchButton'
 
 interface SearchProps {
     placeHolder: string
@@ -21,7 +21,7 @@ const Search: FC<SearchProps> = ({ placeHolder, onSearch, onClear }) => {
         const value = e.target.value
         setInputValue(value)
         if (value === '') {
-            onClear() // Call onClear when the input is empty
+            onClear()
         }
     }
 
