@@ -1,3 +1,5 @@
+import ErrorMessage from '@/components/ErrorMessage'
+import { SkeletonCard } from '@/components/SkeletonCard'
 import {
     Card,
     CardAction,
@@ -16,6 +18,7 @@ const SearchVerse: FC = () => {
 
     const {
         data: searchResult,
+        isPending,
         isError,
         error,
     } = useSearchVerseQuery(searchTerm)
@@ -29,30 +32,30 @@ const SearchVerse: FC = () => {
     }
 
     return (
-        <div className="flex flex-col items-center">
-            <Card className="m-4 w-auto p-6 shadow-md md:m-8 md:w-3xl md:p-12">
-                <CardHeader>
-                    <CardTitle className="text-3xl">Verse Search</CardTitle>
-                    <CardAction className="flex gap-3">
-                        <Search
-                            placeHolder="e.g. John 3:16, matt 25:31-33,46"
-                            onSearch={handleSearch}
-                            onClear={handleClear}
-                        />
-                    </CardAction>
-                </CardHeader>
+        <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">
+            <CardHeader>
+                <CardTitle className="text-3xl">Verse Search</CardTitle>
+                <CardAction>
+                    <Search
+                        placeHolder="e.g. John 3:16, matt 25:31-33,46"
+                        onSearch={handleSearch}
+                        onClear={handleClear}
+                    />
+                </CardAction>
+            </CardHeader>
 
-                <CardContent className="flex flex-wrap gap-3 px-0">
-                    {isError ? (
-                        <p className="text-red-500">Error: {error.message}</p>
-                    ) : (
-                        searchResult?.map(({ verse, text }) => (
-                            <Verse verse={verse} text={text} key={verse} />
-                        ))
-                    )}
-                </CardContent>
-            </Card>
-        </div>
+            <CardContent className="flex flex-wrap gap-3 px-0">
+                {isPending ? (
+                    <SkeletonCard />
+                ) : isError ? (
+                    <ErrorMessage message={error.message} />
+                ) : (
+                    searchResult.map(({ verse, text }) => (
+                        <Verse verse={verse} text={text} key={verse} />
+                    ))
+                )}
+            </CardContent>
+        </Card>
     )
 }
 
