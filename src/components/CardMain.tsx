@@ -6,7 +6,7 @@ interface CardProps {
 }
 
 const CardMain: FC<CardProps> = ({ children }) => {
-    return <Card className="m-4 p-6 shadow-md md:m-8 md:p-12">{children}</Card>
+    return <Card className="mx-4 p-6 shadow-md md:m-8 md:p-12">{children}</Card>
 }
 
 export default CardMain
