@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input'
+import { useDebouncedEffect } from '@/lib/hooks'
 import { useState, type ChangeEvent, type KeyboardEvent } from 'react'
 
 interface SearchProps {
@@ -14,14 +15,22 @@ export function Search({
 }: SearchProps) {
     const [searchTerm, setSearchTerm] = useState('')
 
+    useDebouncedEffect(
+        () => {
+            if (searchTerm === '') {
+                onClear()
+                return
+            }
+
+            onSearch(searchTerm)
+        },
+        500,
+        [searchTerm]
+    )
+
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const value = e.target.value
         setSearchTerm(value)
-        if (value === '') {
-            onClear()
-            return
-        }
-        onSearch(value)
     }
 
     function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
