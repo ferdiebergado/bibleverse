@@ -1,11 +1,14 @@
-import { type FC } from 'react'
-import RandomVerse from './features/randomVerse/RandomVerse'
-import SearchVerse from './features/searchVerse/SearchVerse'
+import RandomVerse from '@/features/randomVerse/RandomVerse'
+import SkeletonRandomVerse from '@/features/randomVerse/SkeletonRandomVerse'
+import SearchVerse from '@/features/searchVerse/SearchVerse'
+import { Suspense, type FC } from 'react'
 
 const Home: FC = () => {
     return (
         <>
-            <RandomVerse />
+            <Suspense fallback={<SkeletonRandomVerse />}>
+                <RandomVerse />
+            </Suspense>
             <SearchVerse />
         </>
     )

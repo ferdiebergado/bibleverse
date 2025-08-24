@@ -1,16 +1,10 @@
-import ErrorMessage from '@/components/ErrorMessage'
+import { useRandomVerse } from '@/features/randomVerse'
 import type { FC } from 'react'
-import { useRandomVerseQuery } from '.'
-import RandomVerseSkeleton from './Skeleton'
 
 const RandomVerse: FC = () => {
-    const { isPending, isError, error, data } = useRandomVerseQuery()
-
-    if (isPending) return <RandomVerseSkeleton />
-
-    if (isError) return <ErrorMessage message={error.message} />
-
-    const { text, book, chapter, verse } = data
+    const {
+        data: { text, book, chapter, verse },
+    } = useRandomVerse()
 
     return (
         <div className="flex w-full flex-col items-center">
