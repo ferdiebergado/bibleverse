@@ -10,7 +10,11 @@ const NavigationLink: FC<
 
     return (
         <NavigationMenuLink asChild active={isActive}>
-            <NavLink to={to} {...props} />
+            <NavLink
+                to={to}
+                className="no-underline data-[active]:underline data-[active]:underline-offset-6"
+                {...props}
+            />
         </NavigationMenuLink>
     )
 }
