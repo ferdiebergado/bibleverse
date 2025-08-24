@@ -37,7 +37,7 @@ export interface ChaptersRouteParams
     bookId?: string
 }
 
-export function useChaptersQuery(bookId?: string) {
+export function useChapters(bookId?: string) {
     if (!bookId) throw new Error('bookId is required')
 
     return useSuspenseQuery(chaptersQuery(bookId))
