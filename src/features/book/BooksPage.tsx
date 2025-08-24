@@ -1,20 +1,22 @@
+import CardContentMain from '@/components/CardContentMain'
 import CardMain from '@/components/CardMain'
-import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useBooksQuery } from '@/features/book'
-import BookList from '@/features/book/BookList'
-import { type FC } from 'react'
+import { SkeletonCard } from '@/components/SkeletonCard'
+import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import Books from '@/features/book/Books'
+import { Suspense, type FC } from 'react'
 
 const BooksPage: FC = () => {
-    const { data: books } = useBooksQuery()
-
     return (
         <CardMain>
             <CardHeader>
                 <CardTitle className="text-3xl">Books</CardTitle>
+                <CardDescription>Books of the Bible</CardDescription>
             </CardHeader>
-            <CardContent>
-                <BookList books={books} />
-            </CardContent>
+            <CardContentMain>
+                <Suspense fallback={<SkeletonCard />}>
+                    <Books />
+                </Suspense>
+            </CardContentMain>
         </CardMain>
     )
 }

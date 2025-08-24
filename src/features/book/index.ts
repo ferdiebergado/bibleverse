@@ -29,6 +29,6 @@ export const booksQuery = queryOptions({
     queryFn: fetchBooks,
 })
 
-export function useBooksQuery() {
+export function useBooks() {
     return useSuspenseQuery(booksQuery)
 }
