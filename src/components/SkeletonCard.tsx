@@ -7,10 +7,7 @@ export function SkeletonCard() {
                 <Skeleton className="h-12 w-[300px]" />
                 <Skeleton className="h-8 w-[300px]" />
             </div>
-            <div className="flex space-x-6">
-                <Skeleton className="h-[100px] w-[400px] rounded-xl" />
-                <Skeleton className="h-[100px] w-[400px] rounded-xl" />
-            </div>
+            <Skeleton className="h-[100px] w-[400px] rounded-xl" />
         </div>
     )
 }
