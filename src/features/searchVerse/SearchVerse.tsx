@@ -44,7 +44,7 @@ const SearchVerse: FC = () => {
                 {isPending ? (
                     <SkeletonCard />
                 ) : isError ? (
-                    <ErrorMessage message={error.message} />
+                    <ErrorMessage error={error} />
                 ) : (
                     searchResult.map(({ verse, text }) => (
                         <Verse verse={verse} text={text} key={verse} />
