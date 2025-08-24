@@ -6,11 +6,7 @@ interface CardContentProps {
 }
 
 const CardContentMain: FC<CardContentProps> = ({ children }) => {
-    return (
-        <CardContent className="flex flex-wrap gap-3 px-0">
-            {children}
-        </CardContent>
-    )
+    return <CardContent className="flex flex-col">{children}</CardContent>
 }
 
 export default CardContentMain
